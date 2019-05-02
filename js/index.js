@@ -16,8 +16,10 @@
     // d3.csv is basically fetch but it can be be passed a csv file as a parameter
     d3.csv("./data/dataEveryYear.csv")
       .then((csvData) => {
-        data = csvData
+        data = csvData;
         allYearsData = csvData;
+
+        let years = [...new Set(allYearsData.map((row) => row["time"]))];
 
         var prev = d3.select('body')
           .append('button')
@@ -40,8 +42,6 @@
             makeScatterPlot(this.value);
           });
 
-        let years = [...new Set(allYearsData.map((row) => row["time"]))]
-        
         var options = dropDown.selectAll('option')
           .data(years)
           .enter()
